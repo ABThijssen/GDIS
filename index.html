@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Compute and visualize genetic distances • GDVIS</title>
+<title>Compute and visualize genetic distances • GDIS</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Compute and visualize genetic distances">
-<meta name="description" content="GDVIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.">
-<meta property="og:description" content="GDVIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.">
+<meta name="description" content="GDIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.">
+<meta property="og:description" content="GDIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">GDVIS</a>
+    <a class="navbar-brand me-2" href="index.html">GDIS</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
@@ -45,7 +45,7 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="gdvis-tutorial">GDVIS tutorial<a class="anchor" aria-label="anchor" href="#gdvis-tutorial"></a>
+<div class="page-header"><h1 id="gdis-tutorial">GDIS tutorial<a class="anchor" aria-label="anchor" href="#gdis-tutorial"></a>
 </h1></div>
 <p>Anaïs Thijssen (<a href="mailto:a.b.thijssen@gmail.com" class="email">a.b.thijssen@gmail.com</a>) 2025-12-03</p>
 <!-- badges: start -->
@@ -53,27 +53,27 @@
 <hr>
 </div>
 <div class="section level1">
-<h1 id="welcome-to-this-gdvis-tutorial">Welcome to this GDVIS tutorial<a class="anchor" aria-label="anchor" href="#welcome-to-this-gdvis-tutorial"></a>
+<h1 id="welcome-to-this-gdis-tutorial">Welcome to this GDIS tutorial<a class="anchor" aria-label="anchor" href="#welcome-to-this-gdis-tutorial"></a>
 </h1>
-<p><strong>GDVIS (Genetic Distance Visualization)</strong> is an R package that allows you to compute and visualize genetic distances between subtypes of a disorder (2D mode), between a subtype and an external trait (3D mode), between two different subtype definitions (2D_2D mode) and between three different traits (CD mode). Note that all heritabilities need to be on the 50:50 case-control scale. This can be achieved by using the Neffective in LDSC (for more details, see the paper).</p>
-<p>Check out the preprint here: <a href="https://doi.org/10.1101/2025.11.18.25340484" class="external-link uri">https://doi.org/10.1101/2025.11.18.25340484</a><br> Check out the GDVIS website here: <a href="https://gdvis.shinyapps.io/gdvis/" class="external-link uri">https://gdvis.shinyapps.io/gdvis/</a></p>
+<p><strong>GDIS (Genetic Distance Visualization)</strong> is an R package that allows you to compute and visualize genetic distances between subtypes of a disorder (2D mode), between a subtype and an external trait (3D mode), between two different subtype definitions (2D_2D mode) and between three different traits (CD mode). Note that all heritabilities need to be on the 50:50 case-control scale. This can be achieved by using the Neffective in LDSC (for more details, see the paper).</p>
+<p>Check out the preprint here: <a href="https://doi.org/10.1101/2025.11.18.25340484" class="external-link uri">https://doi.org/10.1101/2025.11.18.25340484</a><br> Check out the GDIS website here: <a href="https://GDIS.shinyapps.io/GDIS/" class="external-link uri">https://GDIS.shinyapps.io/GDIS/</a></p>
 <hr>
 </div>
 <div class="section level1">
-<h1 id="download-and-install-gdvis">Download and install GDVIS<a class="anchor" aria-label="anchor" href="#download-and-install-gdvis"></a>
+<h1 id="download-and-install-gdis">Download and install GDIS<a class="anchor" aria-label="anchor" href="#download-and-install-gdis"></a>
 </h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/ABThijsen/GDVIS"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/ABThijsen/GDIS"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://abthijssen.github.io/GDVIS/">GDVIS</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://abthijssen.github.io/GDIS/" class="external-link">GDIS</a></span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level1">
-<h1 id="gdvis-for-one-subtype">GDVIS for one subtype<a class="anchor" aria-label="anchor" href="#gdvis-for-one-subtype"></a>
+<h1 id="gdis-for-one-subtype">GDIS for one subtype<a class="anchor" aria-label="anchor" href="#gdis-for-one-subtype"></a>
 </h1>
-<p>This GDVIS mode is for computing and visualizing a single subtype of a disorder. We will use the example of major depressive disorder (MDD) with childhood trauma (CT) from the paper. There will be a group of controls and a group of MDD cases. The MDD cases are are divided into individuals with childhood trauma (subtype1-cases) and invididuals without childhood trauma (subtype2-cases). Note that it is important that the subtypes together form the full set of cases (e.g., when comparing a subtype that consists of three different groups, such as low impairment, medium impairment and high impairment, the union of any of two of the groups will not be the same as the set of MDD cases).</p>
-<p>GDVIS needs the following minimal input, which needs to be in list format:</p>
+<p>This GDIS mode is for computing and visualizing a single subtype of a disorder. We will use the example of major depressive disorder (MDD) with childhood trauma (CT) from the paper. There will be a group of controls and a group of MDD cases. The MDD cases are are divided into individuals with childhood trauma (subtype1-cases) and invididuals without childhood trauma (subtype2-cases). Note that it is important that the subtypes together form the full set of cases (e.g., when comparing a subtype that consists of three different groups, such as low impairment, medium impairment and high impairment, the union of any of two of the groups will not be the same as the set of MDD cases).</p>
+<p>GDIS needs the following minimal input, which needs to be in list format:</p>
 <ul>
 <li>
 <em>h2_sub1.con</em>: the heritability of the GWAS of the subtype1-cases (here MDD with childhood trauma) versus controls.<br>
@@ -116,7 +116,7 @@
 <li>
 <em>pop.prev_case</em>: the population prevalence of the cases (here the population prevalence of MDD)</li>
 </ul>
-<p>There are optional variables that you can also add, this will allow GDVIS to check its calculated values against LDSC values, the result of which can be found in the logfile. However, this is not necessary and you can create the input list without these variables.</p>
+<p>There are optional variables that you can also add, this will allow GDIS to check its calculated values against LDSC values, the result of which can be found in the logfile. However, this is not necessary and you can create the input list without these variables.</p>
 <ul>
 <li>
 <em>optional_LDSC_rg_allcases.con_sub1.con</em>: the genetic correlation between the GWAS all cases (the pool of subtype1-cases and subtype2-cases) versus controls and the GWAS subtype1-cases versus controls<br>
@@ -156,9 +156,9 @@
 <li>
 <em>folder_location</em>: if you want to save the output in a different folder than the current working directory</li>
 </ul>
-<p>GDVIS will not run when there is no suggested evidence of significant difference between subgroups.<br>
+<p>GDIS will not run when there is no suggested evidence of significant difference between subgroups.<br>
 Specifically, when rg is not significantly different from 1 (filter 1a) AND h2.sub1 is not clearly different from h2.sub2 (filter 1b and 1c), the triangle will not be plotted.<br>
-In some occasions, a triangle will not be plotted while it would have been plotted with larger GWAS sample sizes (and therefore smaller standard errors). GDVIS will also not run when one of the heritabilities is not significant.</p>
+In some occasions, a triangle will not be plotted while it would have been plotted with larger GWAS sample sizes (and therefore smaller standard errors). GDIS will also not run when one of the heritabilities is not significant.</p>
 <p><strong>Create the input list</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -191,30 +191,30 @@ In some occasions, a triangle will not be plotted while it would have been plott
 <span>  optional_LDSC_rg_se_sub2.con_sub1.sub2        <span class="op">=</span> <span class="fl">0.0983</span>,   </span>
 <span>  optional_LDSC_h2_allcases.con                 <span class="op">=</span> <span class="fl">0.0915</span>,    </span>
 <span>  optional_LDSC_h2_se_allcases.con              <span class="op">=</span> <span class="fl">0.0079</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Pass input list to GDVIS_calc</strong><br>
-A logfile will also automatically be generated and saved, which you can find in the folder GDVIS_tutorial_output on the github.</p>
+<p><strong>Pass input list to GDIS_calc</strong><br>
+A logfile will also automatically be generated and saved, which you can find in the folder GDIS_tutorial_output on the github.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDVIS_calc.html">GDVIS_calc</a></span><span class="op">(</span><span class="va">input.list</span><span class="op">)</span></span></code></pre></div>
-<p>GDVIS_calc returns the path to an RData object, which we have put in the variable output (note that the RData object is also saved).<br>
-GDVIS_plot_2D takes as input the output generated from GDVIS_calc.<br>
-Note that the h2 and rg values in the legend are the GDVIS estimated values and not the optional LDSC values. Note that you can manually set the axes limits (this is especially nice if you have multiple triangles and want to make sure the axes are similar, it can also help with making the legend appear outside of the triangle).</p>
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDIS_calc.html">GDIS_calc</a></span><span class="op">(</span><span class="va">input.list</span><span class="op">)</span></span></code></pre></div>
+<p>GDIS_calc returns the path to an RData object, which we have put in the variable output (note that the RData object is also saved).<br>
+GDIS_plot_2D takes as input the output generated from GDIS_calc.<br>
+Note that the h2 and rg values in the legend are the GDIS estimated values and not the optional LDSC values. Note that you can manually set the axes limits (this is especially nice if you have multiple triangles and want to make sure the axes are similar, it can also help with making the legend appear outside of the triangle).</p>
 <p><strong>Plot the subtype</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># GDVIS_plot(output) This will run as well, but we will add some axes restaints </span></span>
-<span><span class="fu"><a href="reference/GDVIS_plot.html">GDVIS_plot</a></span><span class="op">(</span><span class="va">output</span>, x_lower <span class="op">=</span> <span class="op">-</span><span class="fl">0.35</span>, x_upper <span class="op">=</span> <span class="fl">0.35</span>, y_lower <span class="op">=</span> <span class="op">-</span><span class="fl">0.15</span>, y_upper <span class="op">=</span> <span class="fl">0.35</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># GDIS_plot(output) This will run as well, but we will add some axes restaints </span></span>
+<span><span class="fu"><a href="reference/GDIS_plot.html">GDIS_plot</a></span><span class="op">(</span><span class="va">output</span>, x_lower <span class="op">=</span> <span class="op">-</span><span class="fl">0.35</span>, x_upper <span class="op">=</span> <span class="fl">0.35</span>, y_lower <span class="op">=</span> <span class="op">-</span><span class="fl">0.15</span>, y_upper <span class="op">=</span> <span class="fl">0.35</span><span class="op">)</span></span></code></pre></div>
 <p><img src="screenshot_2D.png" width="70%" style="display: block; margin: auto;"></p>
 <hr>
 </div>
 <div class="section level1">
-<h1 id="gdvis-for-one-subtype-with-an-external-trait">GDVIS for one subtype with an external trait<a class="anchor" aria-label="anchor" href="#gdvis-for-one-subtype-with-an-external-trait"></a>
+<h1 id="gdis-for-one-subtype-with-an-external-trait">GDIS for one subtype with an external trait<a class="anchor" aria-label="anchor" href="#gdis-for-one-subtype-with-an-external-trait"></a>
 </h1>
-<p>GDVIS can also plot an external trait on the subtype visualization, making a 3D plot.<br>
+<p>GDIS can also plot an external trait on the subtype visualization, making a 3D plot.<br>
 In this example we will add the external trait Anxiety.<br>
-GDVIS will not run when the input would result in an invalid geometrical representation (see paper for more details).</p>
-<p>GDVIS needs the following extra input:</p>
+GDIS will not run when the input would result in an invalid geometrical representation (see paper for more details).</p>
+<p>GDIS needs the following extra input:</p>
 <ul>
 <li>
-<em>plot_3D</em>: this tells GDVIS that you want to calculate a subtype with an external trait and should be set to TRUE<br>
+<em>plot_3D</em>: this tells GDIS that you want to calculate a subtype with an external trait and should be set to TRUE<br>
 </li>
 <li>
 <em>h2_ext</em>: the heritabitlity of the external trait (on the 50/50 case_control ascertainment scale)<br>
@@ -237,7 +237,7 @@ GDVIS will not run when the input would result in an invalid geometrical represe
 <li>
 <em>pop.prev_ext</em>: the population prevalence of the external trait, if the trait is continuous, set the prevalence to 0.5</li>
 </ul>
-<p>There is some optional input here as well, will allow GDVIS to check its calculated values against LDSC values:</p>
+<p>There is some optional input here as well, will allow GDIS to check its calculated values against LDSC values:</p>
 <ul>
 <li>
 <em>optional_LDSC_rg_sub1.sub2_ext</em>: the genetic correlation of the GWAS subtype1-cases versus subtype2-cases and the GWAS of the external trait</li>
@@ -299,31 +299,31 @@ GDVIS will not run when the input would result in an invalid geometrical represe
 <span>  optional_LDSC_rg_se_sub1.sub2_ext             <span class="op">=</span> <span class="fl">0.1797</span>,</span>
 <span>  optional_LDSC_rg_allcases.con_ext             <span class="op">=</span> <span class="fl">0.6942</span>,</span>
 <span>  optional_LDSC_rg_se_allcases.con_ext          <span class="op">=</span> <span class="fl">0.1733</span><span class="op">)</span> </span></code></pre></div>
-<p><strong>Pass input list to GDVIS_calc</strong><br>
-A logfile will also automatically be generated and saved, which you can find in the folder GDVIS_tutorial_output on the github.</p>
+<p><strong>Pass input list to GDIS_calc</strong><br>
+A logfile will also automatically be generated and saved, which you can find in the folder GDIS_tutorial_output on the github.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output.3D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDVIS_calc.html">GDVIS_calc</a></span><span class="op">(</span><span class="va">input.list.3D</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">output.3D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDIS_calc.html">GDIS_calc</a></span><span class="op">(</span><span class="va">input.list.3D</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Plot the subtype with external trait</strong><br>
 Pass the output object to the plot function to see the plot. The plot is created as .html, the legend as .png and the shiny app shows them together<br>
 Running the code below will open a window containing a shiny object that you can move in 3D space.<br>
-This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://gdvis.shinyapps.io/gdvis/" class="external-link uri">https://gdvis.shinyapps.io/gdvis/</a><br>
+This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://GDIS.shinyapps.io/GDIS/" class="external-link uri">https://GDIS.shinyapps.io/GDIS/</a><br>
 The plot below is a screenshot of the 3D interactive visualization.<br>
 It is possible to just make and save the plots without rendering them and to make the plots without showing the labels.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#GDVIS_plot(output.3D, show.rendering = FALSE, show.names = FALSE)</span></span>
-<span><span class="fu"><a href="reference/GDVIS_plot.html">GDVIS_plot</a></span><span class="op">(</span><span class="va">output.3D</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#GDIS_plot(output.3D, show.rendering = FALSE, show.names = FALSE)</span></span>
+<span><span class="fu"><a href="reference/GDIS_plot.html">GDIS_plot</a></span><span class="op">(</span><span class="va">output.3D</span><span class="op">)</span></span></code></pre></div>
 <p><img src="screenshot_3D.png" width="70%" style="display: block; margin: auto;"></p>
 <hr>
 </div>
 <div class="section level1">
-<h1 id="gdvis-for-comparing-two-subtypes">GDVIS for comparing two subtypes<a class="anchor" aria-label="anchor" href="#gdvis-for-comparing-two-subtypes"></a>
+<h1 id="gdis-for-comparing-two-subtypes">GDIS for comparing two subtypes<a class="anchor" aria-label="anchor" href="#gdis-for-comparing-two-subtypes"></a>
 </h1>
-<p>GDVIS can compute and visualize the relationship between two subtype definitions in 3D geometrical space. You will need all the individual data for both subtype definitions and some information on their relation.<br>
-GDVIS will not run when the input would result in an invalid geometrical representation (see paper for more details)</p>
-<p>Besides the single subtype information, GDVIS needs the following:</p>
+<p>GDIS can compute and visualize the relationship between two subtype definitions in 3D geometrical space. You will need all the individual data for both subtype definitions and some information on their relation.<br>
+GDIS will not run when the input would result in an invalid geometrical representation (see paper for more details)</p>
+<p>Besides the single subtype information, GDIS needs the following:</p>
 <ul>
 <li>
-<em>plot_2D.2D</em>: this tells GDVIS to run in the subtype vs subtype mode<br>
+<em>plot_2D.2D</em>: this tells GDIS to run in the subtype vs subtype mode<br>
 </li>
 <li>
 <em>rg_triangle1.sub1.sub2_triangle2.sub1.sub2</em>: the genetic correlation of the GWAS subtype1-cases versus subtype2-cases from subtype definition A and the GWAS subtype1-cases versus subtype2-cases from subtype definition B</li>
@@ -438,25 +438,25 @@ GDVIS will not run when the input would result in an invalid geometrical represe
 <span></span>
 <span>  <span class="co"># Type info</span></span>
 <span>  plot_2D.2D                                            <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Pass input list to GDVIS_calc</strong><br>
-A logfile will also automatically be generated and saved, which you can find in the folder GDVIS_tutorial_output on the github.<br>
+<p><strong>Pass input list to GDIS_calc</strong><br>
+A logfile will also automatically be generated and saved, which you can find in the folder GDIS_tutorial_output on the github.<br>
 This function will first create the separate subtype plots (and save them) and then create the 3D visualization.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output.2D.2D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDVIS_calc.html">GDVIS_calc</a></span><span class="op">(</span><span class="va">input.list.2D.2D</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">output.2D.2D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDIS_calc.html">GDIS_calc</a></span><span class="op">(</span><span class="va">input.list.2D.2D</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Plot the subtypes</strong><br>
 Pass the output object to the plot function to see the plot. The plot is created as .html, the legend as .png and the shiny app shows them together<br>
 Running the code below will open a window containing a shiny object that you can more in 3D space.<br>
-This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://gdvis.shinyapps.io/gdvis/" class="external-link uri">https://gdvis.shinyapps.io/gdvis/</a><br>
+This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://GDIS.shinyapps.io/GDIS/" class="external-link uri">https://GDIS.shinyapps.io/GDIS/</a><br>
 The plot below is a screenshot of the 3D interactive visualization.<br>
 It is possible to just make and save the plots without rendering them and to make the plots without showing the labels.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#GDVIS_plot(output.2D.2D, show.rendering = FALSE, show.names = FALSE)</span></span>
-<span><span class="fu"><a href="reference/GDVIS_plot.html">GDVIS_plot</a></span><span class="op">(</span><span class="va">output.2D.2D</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#GDIS_plot(output.2D.2D, show.rendering = FALSE, show.names = FALSE)</span></span>
+<span><span class="fu"><a href="reference/GDIS_plot.html">GDIS_plot</a></span><span class="op">(</span><span class="va">output.2D.2D</span><span class="op">)</span></span></code></pre></div>
 <p><img src="screenshot_2D_2D.png" width="70%" style="display: block; margin: auto;"></p>
 <hr>
 </div>
 <div class="section level1">
-<h1 id="gdvis-for-multiple-traits">GDVIS for multiple traits<a class="anchor" aria-label="anchor" href="#gdvis-for-multiple-traits"></a>
+<h1 id="gdis-for-multiple-traits">GDIS for multiple traits<a class="anchor" aria-label="anchor" href="#gdis-for-multiple-traits"></a>
 </h1>
 <p><strong>Create the input list</strong><br>
 Note that no standard errors are asked, you need to check yourself whether your data is sensible to plot.</p>
@@ -478,19 +478,19 @@ Note that no standard errors are asked, you need to check yourself whether your 
 <span>  pop.prev_trait1                               <span class="op">=</span> <span class="fl">0.004</span>,</span>
 <span>  pop.prev_trait2                               <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  pop.prev_trait3                               <span class="op">=</span> <span class="fl">0.16</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Pass input list to GDVIS_calc</strong><br>
-A logfile will also automatically be generated and saved, which you can find in the folder GDVIS_tutorial_output on the github.</p>
+<p><strong>Pass input list to GDIS_calc</strong><br>
+A logfile will also automatically be generated and saved, which you can find in the folder GDIS_tutorial_output on the github.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output.CD</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDVIS_calc.html">GDVIS_calc</a></span><span class="op">(</span><span class="va">input.list.CD</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">output.CD</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/GDIS_calc.html">GDIS_calc</a></span><span class="op">(</span><span class="va">input.list.CD</span><span class="op">)</span></span></code></pre></div>
 <p>Pass the output object to the plot function to see the plot. The plot is created as .html, the legend as .png and the shiny app shows them together<br>
 Running the code below will open a window containing a shiny object that you can more in 3D space.<br>
-This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://gdvis.shinyapps.io/gdvis/" class="external-link uri">https://gdvis.shinyapps.io/gdvis/</a><br>
+This RMarkdown file cannot handle interactive shiny output, for an example of the resulting visualization of the code below, see: <a href="https://GDIS.shinyapps.io/GDIS/" class="external-link uri">https://GDIS.shinyapps.io/GDIS/</a><br>
 The plot below is a screenshot of the 3D interactive visualization.<br>
 It is possible to just make and save the plots without rendering them and to make the plots without showing the labels.</p>
 <p><strong>Plot the subtype</strong></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#GDVIS_plot(output.CD, show.rendering = FALSE, show.names = FALSE)</span></span>
-<span><span class="fu"><a href="reference/GDVIS_plot.html">GDVIS_plot</a></span><span class="op">(</span><span class="va">output.CD</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#GDIS_plot(output.CD, show.rendering = FALSE, show.names = FALSE)</span></span>
+<span><span class="fu"><a href="reference/GDIS_plot.html">GDIS_plot</a></span><span class="op">(</span><span class="va">output.CD</span><span class="op">)</span></span></code></pre></div>
 <p><img src="screenshot_CD.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 
@@ -506,7 +506,7 @@ It is possible to just make and save the plots without rendering them and to mak
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing GDVIS</a></li>
+<li><a href="authors.html#citation">Citing GDIS</a></li>
 </ul>
 </div>
 
@@ -521,8 +521,8 @@ It is possible to just make and save the plots without rendering them and to mak
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=GDVIS" class="external-link"><img src="https://www.r-pkg.org/badges/version/GDVIS" alt="CRAN status"></a></li>
-<li><a href="https://github.com/ABthijssen/GDVIS/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/stefanvermeent/projectlog/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=GDIS" class="external-link"><img src="https://www.r-pkg.org/badges/version/GDIS" alt="CRAN status"></a></li>
+<li><a href="https://github.com/ABthijssen/GDIS/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/stefanvermeent/projectlog/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
