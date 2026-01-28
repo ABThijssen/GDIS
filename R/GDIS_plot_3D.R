@@ -1,14 +1,14 @@
-#' Plot GDVIS 3D plot
+#' Plot GDIS 3D plot
 #'
-#' This function plots a GDVIS visualization based on GDVIS parameters.
+#' This function plots a GDIS visualization based on GDIS parameters.
 
-#' @param input_triangle_parameters the path to the RData GDVIS output, which ends with 3D.triangle_parameters.RData
+#' @param input_triangle_parameters the path to the RData GDIS output, which ends with 3D.triangle_parameters.RData
 #' @param show.rendering option to show the rendering of the plot in an external window, default is TRUE
 #' @param show.names option to show the names of the groups, default is TRUE
 #' @param webversion needs to stay on FALSE
 #' @export
 # Function to plot 3D triangles
-GDVIS_plot_3D <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, webversion = FALSE) {
+GDIS_plot_3D <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, webversion = FALSE) {
 
 
 
@@ -26,7 +26,7 @@ GDVIS_plot_3D <- function(input_triangle_parameters, show.rendering = TRUE, show
     triangle_list <- temp_triangle_env$triangle.output.list
 
     # Show message
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS plot"), " on ", cli::col_cyan(triangle_list$plot_title), " with ", cli::col_cyan(triangle_list$name_ext)))
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS plot"), " on ", cli::col_cyan(triangle_list$plot_title), " with ", cli::col_cyan(triangle_list$name_ext)))
 
     # Directly access the objects
     with(temp_triangle_env, {
@@ -473,7 +473,7 @@ GDVIS_plot_3D <- function(input_triangle_parameters, show.rendering = TRUE, show
 
       # Return message
       cli::cli_alert_info(paste0(" Legend saved as ", folder_location,"/",filename3D,"_3D.legend.png"))
-      cli::cli_alert_success("GDVIS plot succesfully finished")
+      cli::cli_alert_success("GDIS plot succesfully finished")
       if (show.rendering == TRUE) {  cli::cli_alert_info("Showing plot in external window ") }
 
 

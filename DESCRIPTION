@@ -1,9 +1,9 @@
-Package: GDVIS
+Package: GDIS
 Title: Compute and visualize genetic distances
 Version: 0.0.0.9000
 Authors@R: 
     person("Anaïs", "Thijssen", , "a.b.thijssen@gmail.com", role = c("aut", "cre"))
-Description: GDVIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.
+Description: GDIS computes and visualizes genetic distances between subtypes of a disorder, a subtype with an external trait, two subypes, or three external traits.
 License: CC BY 4.0
 Encoding: UTF-8
 Imports: 
@@ -20,4 +20,4 @@ Imports:
   stringr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-URL: https://abthijssen.github.io/GDVIS/
+URL: https://abthijssen.github.io/GDIS/

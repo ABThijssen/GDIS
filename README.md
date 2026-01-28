@@ -1,4 +1,4 @@
-GDVIS tutorial
+GDIS tutorial
 ================
 Anaïs Thijssen (<a.b.thijssen@gmail.com>)
 2025-12-03
@@ -8,15 +8,15 @@ Anaïs Thijssen (<a.b.thijssen@gmail.com>)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/GDVIS)](https://CRAN.R-project.org/package=GDVIS)
-[![R-CMD-check](https://github.com/stefanvermeent/projectlog/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ABthijssen/GDVIS/actions/workflows/R-CMD-check.yaml)
+status](https://www.r-pkg.org/badges/version/GDIS)](https://CRAN.R-project.org/package=GDIS)
+[![R-CMD-check](https://github.com/stefanvermeent/projectlog/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ABthijssen/GDIS/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ------------------------------------------------------------------------
 
-# Welcome to this GDVIS tutorial
+# Welcome to this GDIS tutorial
 
-**GDVIS (Genetic Distance Visualization)** is an R package that allows
+**GDIS (Genetic Distance Visualization)** is an R package that allows
 you to compute and visualize genetic distances between subtypes of a
 disorder (2D mode), between a subtype and an external trait (3D mode),
 between two different subtype definitions (2D_2D mode) and between three
@@ -25,25 +25,25 @@ the 50:50 case-control scale. This can be achieved by using the
 Neffective in LDSC (for more details, see the paper).
 
 Check out the preprint here:
-<https://doi.org/10.1101/2025.11.18.25340484><br> Check out the GDVIS
-website here: <https://gdvis.shinyapps.io/gdvis/>
+<https://doi.org/10.1101/2025.11.18.25340484><br> Check out the GDIS
+website here: <https://GDIS.shinyapps.io/GDIS/>
 
 ------------------------------------------------------------------------
 
-# Download and install GDVIS
+# Download and install GDIS
 
 ``` r
 library(devtools)
-devtools::install_github("https://github.com/ABThijsen/GDVIS")
+devtools::install_github("https://github.com/ABThijsen/GDIS")
 
-library(GDVIS)
+library(GDIS)
 ```
 
 ------------------------------------------------------------------------
 
-# GDVIS for one subtype
+# GDIS for one subtype
 
-This GDVIS mode is for computing and visualizing a single subtype of a
+This GDIS mode is for computing and visualizing a single subtype of a
 disorder. We will use the example of major depressive disorder (MDD)
 with childhood trauma (CT) from the paper. There will be a group of
 controls and a group of MDD cases. The MDD cases are are divided into
@@ -54,7 +54,7 @@ comparing a subtype that consists of three different groups, such as low
 impairment, medium impairment and high impairment, the union of any of
 two of the groups will not be the same as the set of MDD cases).
 
-GDVIS needs the following minimal input, which needs to be in list
+GDIS needs the following minimal input, which needs to be in list
 format:
 
 - *h2_sub1.con*: the heritability of the GWAS of the subtype1-cases
@@ -80,7 +80,7 @@ format:
   population prevalence of MDD)
 
 There are optional variables that you can also add, this will allow
-GDVIS to check its calculated values against LDSC values, the result of
+GDIS to check its calculated values against LDSC values, the result of
 which can be found in the logfile. However, this is not necessary and
 you can create the input list without these variables.
 
@@ -118,14 +118,14 @@ you can create the input list without these variables.
 - *folder_location*: if you want to save the output in a different
   folder than the current working directory
 
-GDVIS will not run when there is no suggested evidence of significant
+GDIS will not run when there is no suggested evidence of significant
 difference between subgroups.  
 Specifically, when rg is not significantly different from 1 (filter 1a)
 AND h2.sub1 is not clearly different from h2.sub2 (filter 1b and 1c),
 the triangle will not be plotted.  
 In some occasions, a triangle will not be plotted while it would have
 been plotted with larger GWAS sample sizes (and therefore smaller
-standard errors). GDVIS will also not run when one of the heritabilities
+standard errors). GDIS will also not run when one of the heritabilities
 is not significant.
 
 **Create the input list**
@@ -163,18 +163,18 @@ input.list <- list(
   optional_LDSC_h2_se_allcases.con              = 0.0079)
 ```
 
-**Pass input list to GDVIS_calc**  
+**Pass input list to GDIS_calc**  
 A logfile will also automatically be generated and saved, which you can
-find in the folder GDVIS_tutorial_output on the github.
+find in the folder GDIS_tutorial_output on the github.
 
 ``` r
-output <- GDVIS_calc(input.list)
+output <- GDIS_calc(input.list)
 ```
 
-GDVIS_calc returns the path to an RData object, which we have put in the
+GDIS_calc returns the path to an RData object, which we have put in the
 variable output (note that the RData object is also saved).  
-GDVIS_plot_2D takes as input the output generated from GDVIS_calc.  
-Note that the h2 and rg values in the legend are the GDVIS estimated
+GDIS_plot_2D takes as input the output generated from GDIS_calc.  
+Note that the h2 and rg values in the legend are the GDIS estimated
 values and not the optional LDSC values. Note that you can manually set
 the axes limits (this is especially nice if you have multiple triangles
 and want to make sure the axes are similar, it can also help with making
@@ -183,25 +183,25 @@ the legend appear outside of the triangle).
 **Plot the subtype**
 
 ``` r
-# GDVIS_plot(output) This will run as well, but we will add some axes restaints 
-GDVIS_plot(output, x_lower = -0.35, x_upper = 0.35, y_lower = -0.15, y_upper = 0.35)
+# GDIS_plot(output) This will run as well, but we will add some axes restaints 
+GDIS_plot(output, x_lower = -0.35, x_upper = 0.35, y_lower = -0.15, y_upper = 0.35)
 ```
 
 <img src="screenshot_2D.png" width="70%" style="display: block; margin: auto;" />
 
 ------------------------------------------------------------------------
 
-# GDVIS for one subtype with an external trait
+# GDIS for one subtype with an external trait
 
-GDVIS can also plot an external trait on the subtype visualization,
+GDIS can also plot an external trait on the subtype visualization,
 making a 3D plot.  
 In this example we will add the external trait Anxiety.  
-GDVIS will not run when the input would result in an invalid geometrical
+GDIS will not run when the input would result in an invalid geometrical
 representation (see paper for more details).
 
-GDVIS needs the following extra input:
+GDIS needs the following extra input:
 
-- *plot_3D*: this tells GDVIS that you want to calculate a subtype with
+- *plot_3D*: this tells GDIS that you want to calculate a subtype with
   an external trait and should be set to TRUE  
 - *h2_ext*: the heritabitlity of the external trait (on the 50/50
   case_control ascertainment scale)  
@@ -216,7 +216,7 @@ GDVIS needs the following extra input:
 - *pop.prev_ext*: the population prevalence of the external trait, if
   the trait is continuous, set the prevalence to 0.5
 
-There is some optional input here as well, will allow GDVIS to check its
+There is some optional input here as well, will allow GDIS to check its
 calculated values against LDSC values:
 
 - *optional_LDSC_rg_sub1.sub2_ext*: the genetic correlation of the GWAS
@@ -284,12 +284,12 @@ input.list.3D <- list(
   optional_LDSC_rg_se_allcases.con_ext          = 0.1733) 
 ```
 
-**Pass input list to GDVIS_calc**  
+**Pass input list to GDIS_calc**  
 A logfile will also automatically be generated and saved, which you can
-find in the folder GDVIS_tutorial_output on the github.
+find in the folder GDIS_tutorial_output on the github.
 
 ``` r
-output.3D <- GDVIS_calc(input.list.3D)
+output.3D <- GDIS_calc(input.list.3D)
 ```
 
 **Plot the subtype with external trait**  
@@ -300,32 +300,32 @@ Running the code below will open a window containing a shiny object that
 you can move in 3D space.  
 This RMarkdown file cannot handle interactive shiny output, for an
 example of the resulting visualization of the code below, see:
-<https://gdvis.shinyapps.io/gdvis/>  
+<https://GDIS.shinyapps.io/GDIS/>  
 The plot below is a screenshot of the 3D interactive visualization.  
 It is possible to just make and save the plots without rendering them
 and to make the plots without showing the labels.
 
 ``` r
-#GDVIS_plot(output.3D, show.rendering = FALSE, show.names = FALSE)
-GDVIS_plot(output.3D)
+#GDIS_plot(output.3D, show.rendering = FALSE, show.names = FALSE)
+GDIS_plot(output.3D)
 ```
 
 <img src="screenshot_3D.png" width="70%" style="display: block; margin: auto;" />
 
 ------------------------------------------------------------------------
 
-# GDVIS for comparing two subtypes
+# GDIS for comparing two subtypes
 
-GDVIS can compute and visualize the relationship between two subtype
+GDIS can compute and visualize the relationship between two subtype
 definitions in 3D geometrical space. You will need all the individual
 data for both subtype definitions and some information on their
 relation.  
-GDVIS will not run when the input would result in an invalid geometrical
+GDIS will not run when the input would result in an invalid geometrical
 representation (see paper for more details)
 
-Besides the single subtype information, GDVIS needs the following:
+Besides the single subtype information, GDIS needs the following:
 
-- *plot_2D.2D*: this tells GDVIS to run in the subtype vs subtype mode  
+- *plot_2D.2D*: this tells GDIS to run in the subtype vs subtype mode  
 - *rg_triangle1.sub1.sub2_triangle2.sub1.sub2*: the genetic correlation
   of the GWAS subtype1-cases versus subtype2-cases from subtype
   definition A and the GWAS subtype1-cases versus subtype2-cases from
@@ -440,14 +440,14 @@ input.list.2D.2D <- list(
   plot_2D.2D                                            = TRUE)
 ```
 
-**Pass input list to GDVIS_calc**  
+**Pass input list to GDIS_calc**  
 A logfile will also automatically be generated and saved, which you can
-find in the folder GDVIS_tutorial_output on the github.  
+find in the folder GDIS_tutorial_output on the github.  
 This function will first create the separate subtype plots (and save
 them) and then create the 3D visualization.
 
 ``` r
-output.2D.2D <- GDVIS_calc(input.list.2D.2D)
+output.2D.2D <- GDIS_calc(input.list.2D.2D)
 ```
 
 **Plot the subtypes**  
@@ -458,21 +458,21 @@ Running the code below will open a window containing a shiny object that
 you can more in 3D space.  
 This RMarkdown file cannot handle interactive shiny output, for an
 example of the resulting visualization of the code below, see:
-<https://gdvis.shinyapps.io/gdvis/>  
+<https://GDIS.shinyapps.io/GDIS/>  
 The plot below is a screenshot of the 3D interactive visualization.  
 It is possible to just make and save the plots without rendering them
 and to make the plots without showing the labels.
 
 ``` r
-#GDVIS_plot(output.2D.2D, show.rendering = FALSE, show.names = FALSE)
-GDVIS_plot(output.2D.2D)
+#GDIS_plot(output.2D.2D, show.rendering = FALSE, show.names = FALSE)
+GDIS_plot(output.2D.2D)
 ```
 
 <img src="screenshot_2D_2D.png" width="70%" style="display: block; margin: auto;" />
 
 ------------------------------------------------------------------------
 
-# GDVIS for multiple traits
+# GDIS for multiple traits
 
 **Create the input list**  
 Note that no standard errors are asked, you need to check yourself
@@ -498,12 +498,12 @@ input.list.CD <- list(
   pop.prev_trait3                               = 0.16)
 ```
 
-**Pass input list to GDVIS_calc**  
+**Pass input list to GDIS_calc**  
 A logfile will also automatically be generated and saved, which you can
-find in the folder GDVIS_tutorial_output on the github.
+find in the folder GDIS_tutorial_output on the github.
 
 ``` r
-output.CD <- GDVIS_calc(input.list.CD)
+output.CD <- GDIS_calc(input.list.CD)
 ```
 
 Pass the output object to the plot function to see the plot. The plot is
@@ -513,7 +513,7 @@ Running the code below will open a window containing a shiny object that
 you can more in 3D space.  
 This RMarkdown file cannot handle interactive shiny output, for an
 example of the resulting visualization of the code below, see:
-<https://gdvis.shinyapps.io/gdvis/>  
+<https://GDIS.shinyapps.io/GDIS/>  
 The plot below is a screenshot of the 3D interactive visualization.  
 It is possible to just make and save the plots without rendering them
 and to make the plots without showing the labels.
@@ -521,8 +521,9 @@ and to make the plots without showing the labels.
 **Plot the subtype**
 
 ``` r
-#GDVIS_plot(output.CD, show.rendering = FALSE, show.names = FALSE)
-GDVIS_plot(output.CD)
+#GDIS_plot(output.CD, show.rendering = FALSE, show.names = FALSE)
+GDIS_plot(output.CD)
 ```
 
 <img src="screenshot_CD.png" width="70%" style="display: block; margin: auto;" />
+

@@ -1,8 +1,8 @@
-#' Plot GDVIS plot
+#' Plot GDIS plot
 #'
-#' This function plots a GDVIS visualization based on GDVIS parameters.
+#' This function plots a GDIS visualization based on GDIS parameters.
 
-#' @param input_triangle_parameters the path to the RData GDVIS output, which ends with 3D.triangle_parameters.RData
+#' @param input_triangle_parameters the path to the RData GDIS output, which ends with 3D.triangle_parameters.RData
 #' @param show.rendering option to show the rendering of the plot in an external window, default is TRUE
 #' @param show.names option to show the names of the groups, default is TRUE
 #' @param x_upper change axes to make the plots all the same size or make the legend appear outside of the plot (only for 2D plot)
@@ -10,8 +10,8 @@
 #' @param y_upper change axes to make the plots all the same size or make the legend appear outside of the plot (only for 2D plot)
 #' @param y_lower change axes to make the plots all the same size or make the legend appear outside of the plot (only for 2D plot)
 #' @export
-# Function to plot GDVIS triangles
-GDVIS_plot <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, x_lower = NULL, x_upper = NULL, y_lower = NULL, y_upper = NULL) {
+# Function to plot GDIS triangles
+GDIS_plot <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, x_lower = NULL, x_upper = NULL, y_lower = NULL, y_upper = NULL) {
 
 # Create a new environment
 temp_triangle_env <- new.env()
@@ -42,23 +42,23 @@ list2env(data.path, envir = temp_triangle_env)
 
 ## 2D
 if (temp_triangle_env$plot_3D == FALSE & temp_triangle_env$plot_CD == FALSE & temp_triangle_env$plot_2D.2D == FALSE) {
-  return(GDVIS::GDVIS_plot_2D(input_triangle_parameters, x_lower = x_lower, x_upper = x_upper, y_lower = y_lower, y_upper = y_upper))
+  return(GDIS::GDIS_plot_2D(input_triangle_parameters, x_lower = x_lower, x_upper = x_upper, y_lower = y_lower, y_upper = y_upper))
 }
 
 ## 3D
 if (temp_triangle_env$plot_3D == TRUE) {
-  return(GDVIS::GDVIS_plot_3D(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
+  return(GDIS::GDIS_plot_3D(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
 }
 
 ## 2D.2D
 if (temp_triangle_env$plot_2D.2D == TRUE) {
-  return(GDVIS::GDVIS_plot_2D_2D(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
+  return(GDIS::GDIS_plot_2D_2D(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
 }
 
 ## CD
 if (temp_triangle_env$plot_CD == TRUE) {
-  return(GDVIS::GDVIS_plot_CD(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
+  return(GDIS::GDIS_plot_CD(input_triangle_parameters, show.rendering = show.rendering, show.names = show.names))
 }
 
 
-} # end GDVIS_plot
+} # end GDIS_plot

@@ -1,6 +1,6 @@
-#' Calculate GDVIS parameters
+#' Calculate GDIS parameters
 #'
-#' This function calculates GDVIS parameters. Input is based on LDSC estimates. h2 needs to be on the observed scale with 50:50 ascertainment.
+#' This function calculates GDIS parameters. Input is based on LDSC estimates. h2 needs to be on the observed scale with 50:50 ascertainment.
 #' For 2D the input is:
 #' h2_sub1.con: the heritability of the GWAS of the subtype1-cases versus controls.
 #' h2_se_sub1.con: the standard error of the heritability
@@ -17,7 +17,7 @@
 #' folder_location: the folder that you want the data to be stored at
 #' filename: the name of the file for saving
 #' pop.prev_case: the population prevalence of the cases
-#' There are optional variables that you can also add, this will allow GDVIS to check its calculated values against LDSC values, the result of which can be found in the logfile.
+#' There are optional variables that you can also add, this will allow GDIS to check its calculated values against LDSC values, the result of which can be found in the logfile.
 #' However, this is not necessary and you can create the input list without these variables.
 #' optional_LDSC_rg_allcases.con_sub1.con: the genetic correlation between the GWAS all cases versus controls and the GWAS subtype1-cases versus controls
 #' optional_LDSC_rg_se_allcases.con_sub1.con: the standard error of the genetic correlation
@@ -33,7 +33,7 @@
 #' optional_LDSC_h2_se_allcases.con: the standard error of the heritability
 #'
 #' If you want to plot a subtype with an external trait, you need this additional input:
-#' plot_3D: this tells GDVIS that you want to calculate a subtype with an external trait and should be set to TRUE
+#' plot_3D: this tells GDIS that you want to calculate a subtype with an external trait and should be set to TRUE
 #' h2_ext: the heritabitlity of the external trait
 #' h2_se_ext: the standard error of the heritabilty
 #' rg_sub1.con_ext: the genetic correlation of the GWAS subtype1-cases versus controls and the GWAS of the external trait
@@ -42,14 +42,14 @@
 #' rg_se_sub2.con_ext: the standard error of the genetic correlation
 #' name_ext: the name of the external trait
 #' pop.prev_ext: the population prevalence of the external trait, if the trait is continuous, set the prevalence to 0.5
-#' There is some optional input here as well, will allow GDVIS to check its calculated values against LDSC values:
+#' There is some optional input here as well, will allow GDIS to check its calculated values against LDSC values:
 #' optional_LDSC_rg_sub1.sub2_ext: the genetic correlation of the GWAS subtype1-cases versus subtype2-cases and the GWAS of the external trait
 #' optional_LDSC_rg_se_sub1.sub2_ext: the standard error of the genetic correlation
 #' optional_LDSC_rg_allcases.con_ext: the genetic correlation of the GWAS all cases and the GWAS of the external trait
 #' optional_LDSC_rg_se_allcases.con_ext: the standard error of the genetic correlation
 #' If you want to compare two different subtypes, you need the following:
 #' all input for both subtypes as described above, but staarting with the triangle1./triangle2. e.g. triangle1.h2_sub1.con and triangle2.h2_sub2.con
-#' plot_2D.2D: this tells GDVIS to run in the subtype vs subtype mode
+#' plot_2D.2D: this tells GDIS to run in the subtype vs subtype mode
 #' rg_triangle1.sub1.sub2_triangle2.sub1.sub2: the genetic correlation of the GWAS subtype1-cases versus subtype2-cases from subtype definition A and the GWAS subtype1-cases versus subtype2-cases from subtype definition B
 #' rg_se_triangle1.sub1.sub2_triangle2.sub1.sub2: the standard error the the genetic correlation
 #' rg_triangle1.sub1.con_triangle2.sub1.con: the genetic correlation of the GWAS subtype1-cases versus controls from subtype definition A and the GWAS subtype1-cases versus controls from subtype definition B
@@ -65,7 +65,7 @@
 #' @param webversion needs to stay on FALSE
 #' @export
 # Function to calculate parameters needed for triangle plotting
-GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALSE) {
+GDIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALSE) {
 
 
 #### Set up the environment and load + check data ------------------------------------------------------------------------------------
@@ -83,17 +83,17 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
   ## Print the subgroup to the console
   if (triangle.input.list$plot_3D == TRUE & webversion == TRUE) {
-    log_fun(paste0("Running GDVIS calc on ", triangle.input.list$plot_title, " with ",  triangle.input.list$name_ext), type = "info") }
+    log_fun(paste0("Running GDIS calc on ", triangle.input.list$plot_title, " with ",  triangle.input.list$name_ext), type = "info") }
   if (triangle.input.list$plot_3D == TRUE & webversion == FALSE) {
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS calc"), " on ", cli::col_cyan(triangle.input.list$plot_title), " with ",  cli::col_cyan(triangle.input.list$name_ext)))  }
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS calc"), " on ", cli::col_cyan(triangle.input.list$plot_title), " with ",  cli::col_cyan(triangle.input.list$name_ext)))  }
   if (triangle.input.list$plot_2D.2D == TRUE  & webversion == FALSE) {
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS calc")," in 2D.2D mode on ", cli::col_cyan(triangle.input.list$triangle1.plot_title),  " and ",cli::col_cyan(triangle.input.list$triangle2.plot_title))) }
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS calc")," in 2D.2D mode on ", cli::col_cyan(triangle.input.list$triangle1.plot_title),  " and ",cli::col_cyan(triangle.input.list$triangle2.plot_title))) }
   if (triangle.input.list$plot_2D.2D == FALSE & triangle.input.list$plot_3D == FALSE  & webversion == FALSE & triangle.input.list$plot_CD == FALSE) {
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS calc"), " on ", cli::col_cyan(triangle.input.list$plot_title))) }
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS calc"), " on ", cli::col_cyan(triangle.input.list$plot_title))) }
   if (triangle.input.list$plot_2D.2D == FALSE & triangle.input.list$plot_3D == FALSE  & webversion == TRUE) {
-    log_fun(paste0("Running GDVIS calc on ", triangle.input.list$plot_title), type = "info") }
+    log_fun(paste0("Running GDIS calc on ", triangle.input.list$plot_title), type = "info") }
   if (triangle.input.list$plot_CD == TRUE & webversion == FALSE) {
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS calc")," in CD mode on ", cli::col_cyan(triangle.input.list$name_trait1), ", ", cli::col_cyan(triangle.input.list$name_trait2)," and ",cli::col_cyan(triangle.input.list$name_trait3))) }
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS calc")," in CD mode on ", cli::col_cyan(triangle.input.list$name_trait1), ", ", cli::col_cyan(triangle.input.list$name_trait2)," and ",cli::col_cyan(triangle.input.list$name_trait3))) }
 
   # Set required names
   if (triangle.input.list$plot_3D == TRUE) {
@@ -546,7 +546,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
       # Update save_data with the function result
       save_data <- f.triangle_possible(line1, line2, line3)
-      message_triangle_not_possible <- "GDVIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1"
+      message_triangle_not_possible <- "GDIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1"
       if(f.triangle_possible(line1, line2, line3) == FALSE & webversion == FALSE) { cli::cli_alert_danger(cli::col_red(message_triangle_not_possible))   }
       if(f.triangle_possible(line1, line2, line3) == FALSE & webversion == TRUE) { log_fun(message_triangle_not_possible, type = "info")   }
 
@@ -755,20 +755,20 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
       # Calculate checks
       if( abs((f.length_from_coords(coord_ext,coord_popmean)     -  d_ext.popmean ))          >  ( 0.02 * d_ext.popmean ))  {
-        if (webversion == FALSE) {cli::cli_alert_danger(cli::col_red("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_ext.popmean differs more than 2% from LDSC value")) }
-        if (webversion == TRUE) { log_fun("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_ext.popmean differs more than 2% from LDSC value", type = "info") }
+        if (webversion == FALSE) {cli::cli_alert_danger(cli::col_red("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_ext.popmean differs more than 2% from LDSC value")) }
+        if (webversion == TRUE) { log_fun("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_ext.popmean differs more than 2% from LDSC value", type = "info") }
         save_data <- FALSE }
       if( abs((f.length_from_coords(coord_ext.con,coord_popmean) -  d_extcontrol.popmean ))   >  ( 0.02 * d_extcontrol.popmean ))  {
-        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_extcontrol.popmean differs more than 2% from LDSC value")) }
-        if (webversion == TRUE) {log_fun("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_extcontrol.popmean differs more than 2% from LDSC value", type = "info") }
+        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_extcontrol.popmean differs more than 2% from LDSC value")) }
+        if (webversion == TRUE) {log_fun("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated d_extcontrol.popmean differs more than 2% from LDSC value", type = "info") }
         save_data <- FALSE }
       if( abs((internal_check_a_sub1.con_ext  -  a_sub1.con_ext)) > 0.05) {
-        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub1.con_ext differs more than 0.05 from LDSC value")) }
-        if (webversion == TRUE) {log_fun("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub1.con_ext differs more than 0.05 from LDSC value", type = "info") }
+        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub1.con_ext differs more than 0.05 from LDSC value")) }
+        if (webversion == TRUE) {log_fun("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub1.con_ext differs more than 0.05 from LDSC value", type = "info") }
         save_data <- FALSE }
       if( abs((internal_check_a_sub2.con_ext  -  a_sub2.con_ext)) > 0.05) {
-        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub2.con_ext differs more than 0.05 from LDSC value")) }
-        if (webversion == TRUE) {log_fun("GDVIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub2.con_ext differs more than 0.05 from LDSC value", type = "info") }
+        if (webversion == FALSE) { cli::cli_alert_danger(cli::col_red("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub2.con_ext differs more than 0.05 from LDSC value")) }
+        if (webversion == TRUE) {log_fun("GDIS was not able to accurately estimate 3D coordinates, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1. Specific error: calculated angle a_sub2.con_ext differs more than 0.05 from LDSC value", type = "info") }
         save_data <- FALSE }
     }
     }
@@ -1028,7 +1028,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
     # Get the time
     rounded_time <- as.POSIXct(round(as.numeric(Sys.time()) / 2) * 2, origin = "1970-01-01")
 
-    # Mode in which GDVIS was run
+    # Mode in which GDIS was run
     if (plot_2D.2D) {
       mode <- "2D   "
       to_logfile_required_input_pars <- to_logfile_required_input_pars_2D
@@ -1071,12 +1071,12 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
     # Write general info
     writeLines("............................................................", con_log)
-    writeLines(".   GDVIS software created by: A.B. Thijssen               .", con_log)
+    writeLines(".   GDIS software created by: A.B. Thijssen               .", con_log)
     writeLines(paste(sprintf(".   Log file created on: %s", rounded_time),"              ."), con_log)
     if (webversion == FALSE) {
-      writeLines(paste(".   GDVIS mode used:", mode, "                                ."), con_log) }
+      writeLines(paste(".   GDIS mode used:", mode, "                                ."), con_log) }
     if (webversion == TRUE) {
-      writeLines(paste(".   GDVIS mode used: online webversion                     ."), con_log)  }
+      writeLines(paste(".   GDIS mode used: online webversion                     ."), con_log)  }
     writeLines("............................................................", con_log)
     writeLines("    ", con_log)
     writeLines("    ", con_log)
@@ -1198,70 +1198,70 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
 
     writeLines("Double check 1:", con_log)
-    writeLines(paste0("GDVIS calculated the heritability of ", name_sub1, " versus ", name_sub2, " as ", round(h2_sub1.sub2, 4)), con_log)
+    writeLines(paste0("GDIS calculated the heritability of ", name_sub1, " versus ", name_sub2, " as ", round(h2_sub1.sub2, 4)), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check1_passed_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_h2_sub1.sub2, " (se = ", optional_LDSC_h2_se_sub1.sub2, ")"), con_log)
-      if (check1_passed_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2 == TRUE) { writeLines(paste0("The GDVIS value lies within the 95% CI ",optional_LDSC_h2_sub1.sub2, " +- 1.96 * ", optional_LDSC_h2_se_sub1.sub2,"."), con_log)}
-      if (check1_passed_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2 == FALSE) {  writeLines(paste0("The GDVIS value does not lie within the 95% CI +- 1.96 * ", optional_LDSC_h2_se_sub1.sub2,"."), con_log)}
+      if (check1_passed_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2 == TRUE) { writeLines(paste0("The GDIS value lies within the 95% CI ",optional_LDSC_h2_sub1.sub2, " +- 1.96 * ", optional_LDSC_h2_se_sub1.sub2,"."), con_log)}
+      if (check1_passed_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2 == FALSE) {  writeLines(paste0("The GDIS value does not lie within the 95% CI +- 1.96 * ", optional_LDSC_h2_se_sub1.sub2,"."), con_log)}
       writeLines(paste0("The difference between ",round(h2_sub1.sub2, 4), " and ", round(optional_LDSC_h2_sub1.sub2,4), " is ",  round(check1_difference_h2_sub1.sub2_and_optional_LDSC_h2_sub1.sub2, 4), ", this is ", round(check1.propSE, 4), " * se.") , con_log) }
     writeLines("    ", con_log)
 
 
     writeLines("Double check 2:", con_log)
-    writeLines(paste0("GDVIS calculated the heritability of allcases versus ",name_con," as ", round(h2_allcases.con,4) ), con_log)
+    writeLines(paste0("GDIS calculated the heritability of allcases versus ",name_con," as ", round(h2_allcases.con,4) ), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check2_passed_h2_allcases.con_and_optional_LDSC_h2_allcases.con)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is  ", optional_LDSC_h2_allcases.con, " (se = ", optional_LDSC_h2_se_allcases.con, ")"), con_log)
-      if (check2_passed_h2_allcases.con_and_optional_LDSC_h2_allcases.con == TRUE)  { writeLines(paste0("The GDVIS value lies within the 95%  CI +- 1.96 * ", optional_LDSC_h2_se_allcases.con,"."), con_log)}
-      if (check2_passed_h2_allcases.con_and_optional_LDSC_h2_allcases.con == FALSE) {  writeLines(paste0("The GDVIS value does not lie within the 95% CI +- 1.96 * ", optional_LDSC_h2_se_allcases.con,"."), con_log)}
+      if (check2_passed_h2_allcases.con_and_optional_LDSC_h2_allcases.con == TRUE)  { writeLines(paste0("The GDIS value lies within the 95%  CI +- 1.96 * ", optional_LDSC_h2_se_allcases.con,"."), con_log)}
+      if (check2_passed_h2_allcases.con_and_optional_LDSC_h2_allcases.con == FALSE) {  writeLines(paste0("The GDIS value does not lie within the 95% CI +- 1.96 * ", optional_LDSC_h2_se_allcases.con,"."), con_log)}
       writeLines(paste0("The difference between ",round(h2_allcases.con, 4), " and ", round(optional_LDSC_h2_allcases.con, 4), " is ",  round(check2_difference_h2_allcases.con_and_optional_LDSC_h2_allcases.con,4), ", this is ", round(check2.propSE, 4), " * se.") , con_log) }
     writeLines("    ", con_log)
 
     writeLines("Double check 3a:", con_log)
-    writeLines(paste0("GDVIS calculated the genetic correlation between ", name_sub1, ".vs." , name_con, " and ", name_sub1, ".vs.", name_sub2, " as ", round(rg_sub1.con_sub1.sub2,4)), con_log)
+    writeLines(paste0("GDIS calculated the genetic correlation between ", name_sub1, ".vs." , name_con, " and ", name_sub1, ".vs.", name_sub2, " as ", round(rg_sub1.con_sub1.sub2,4)), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check3a_passed_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_sub1.con_sub1.sub2, " (se = ", optional_LDSC_rg_se_sub1.con_sub1.sub2, ")"), con_log)
-      if (check3a_passed_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2 == TRUE)  { writeLines(paste0("The GDVIS value lies within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
-      if (check3a_passed_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2 == FALSE) { writeLines(paste0("The GDVIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
+      if (check3a_passed_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2 == TRUE)  { writeLines(paste0("The GDIS value lies within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
+      if (check3a_passed_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2 == FALSE) { writeLines(paste0("The GDIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
       writeLines(paste0("The difference between ",round(rg_sub1.con_sub1.sub2, 4), " and ", round(optional_LDSC_rg_sub1.con_sub1.sub2, 4), " is ",  round(check3a_difference_rg_sub1.con_sub1.sub2_and_optional_LDSC_rg_sub1.con_sub1.sub2, 4), ", this is ", round(check3a.propSE, 4), " * se.") , con_log) }
     writeLines("    ", con_log)
 
     writeLines("Double check 3b:", con_log)
-    writeLines(paste0("GDVIS calculated the genetic correlation between ", name_sub2, ".vs." , name_con, " and ", name_sub1, ".vs.", name_sub2, " as ", round(rg_sub2.con_sub1.sub2, 4)), con_log)
+    writeLines(paste0("GDIS calculated the genetic correlation between ", name_sub2, ".vs." , name_con, " and ", name_sub1, ".vs.", name_sub2, " as ", round(rg_sub2.con_sub1.sub2, 4)), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check3b_passed_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_sub2.con_sub1.sub2, " (se = ", optional_LDSC_rg_se_sub2.con_sub1.sub2, ")"), con_log)
-      if (check3b_passed_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2 == TRUE)  { writeLines(paste0("The GDVIS value lies within the 95%  CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
-      if (check3b_passed_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2 == FALSE) { writeLines(paste0("The GDVIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub2.con_sub1.sub2, 4),"."), con_log)}
+      if (check3b_passed_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2 == TRUE)  { writeLines(paste0("The GDIS value lies within the 95%  CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.con_sub1.sub2, 4),"."), con_log)}
+      if (check3b_passed_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2 == FALSE) { writeLines(paste0("The GDIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_sub2.con_sub1.sub2, 4),"."), con_log)}
       writeLines(paste0("The difference between ",round(rg_sub2.con_sub1.sub2, 4), " and ", round(optional_LDSC_rg_sub2.con_sub1.sub2, 4), " is ",  round(check3b_difference_rg_sub2.con_sub1.sub2_and_optional_LDSC_rg_sub2.con_sub1.sub2, 4), ", this is ", round(check3b.propSE, 4), " * se.") , con_log)  }
     writeLines("    ", con_log)
 
 
     writeLines("Double check 4a:", con_log)
-    writeLines(paste0("GDVIS calculated the genetic correlation between allcases.vs." , name_con, " and ", name_sub1, ".vs.", name_con, " as ", round(rg_allcases.con_sub1.con,4)), con_log)
+    writeLines(paste0("GDIS calculated the genetic correlation between allcases.vs." , name_con, " and ", name_sub1, ".vs.", name_con, " as ", round(rg_allcases.con_sub1.con,4)), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check4a_passed_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_allcases.con_sub1.con, " (se = ", optional_LDSC_rg_se_allcases.con_sub1.con, ")"), con_log)
-      if (check4a_passed_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con == TRUE)  { writeLines(paste0("The GDVIS value lies within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub1.con, 4),"."), con_log)}
-      if (check4a_passed_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con == FALSE) { writeLines(paste0("The GDVIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub1.con, 4),"."), con_log)}
+      if (check4a_passed_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con == TRUE)  { writeLines(paste0("The GDIS value lies within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub1.con, 4),"."), con_log)}
+      if (check4a_passed_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con == FALSE) { writeLines(paste0("The GDIS value does not lie within the 95% CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub1.con, 4),"."), con_log)}
       writeLines(paste0("The difference between ",round(rg_allcases.con_sub1.con, 4), " and ", round(optional_LDSC_rg_allcases.con_sub1.con, 4), " is ",  round(check4a_difference_rg_sub1.con_allcases.con_and_optional_LDSC_rg_sub1.con_allcases.con, 4), ", this is ", round(check1.propSE, 4), " * se.") , con_log) }
     writeLines("    ", con_log)
 
     writeLines("Double check 4b:", con_log)
-    writeLines(paste0("GDVIS calculated the genetic correlation between allcases.vs." , name_con, " and ", name_sub2, ".vs.", name_con, " is calculated to be ", round(rg_allcases.con_sub2.con, 4)), con_log)
+    writeLines(paste0("GDIS calculated the genetic correlation between allcases.vs." , name_con, " and ", name_sub2, ".vs.", name_con, " is calculated to be ", round(rg_allcases.con_sub2.con, 4)), con_log)
     # Don't write this stuff if no optional input was provided
     if (is.na(check4b_passed_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
       # What to write as dubbelcheck
       writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_allcases.con_sub2.con, " (se = ", optional_LDSC_rg_se_allcases.con_sub2.con, ")"), con_log)
-      if (check4b_passed_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con == TRUE)  { writeLines(paste0("The GDVIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub2.con, 4),"."), con_log)}
-      if (check4b_passed_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con == FALSE) { writeLines(paste0("The GDVIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub2.con, 4),"."), con_log)}
+      if (check4b_passed_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con == TRUE)  { writeLines(paste0("The GDIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub2.con, 4),"."), con_log)}
+      if (check4b_passed_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con == FALSE) { writeLines(paste0("The GDIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_sub2.con, 4),"."), con_log)}
       writeLines(paste0("The difference between ",round(rg_allcases.con_sub2.con, 4), " and ", round(optional_LDSC_rg_allcases.con_sub2.con, 4), " is ",  round(check4b_difference_rg_sub2.con_allcases.con_and_optional_LDSC_rg_sub2.con_allcases.con, 4), ", this is ", round(check1.propSE, 4), " * se.") , con_log)  }
     writeLines("    ", con_log)
 
@@ -1271,35 +1271,35 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
       writeLines("Internal 3D double checks", con_log)
       writeLines(strrep("-", 60), con_log)
       writeLines("Double check 5:", con_log)
-      writeLines(paste0("GDVIS calculated the genetic correlation between ", name_sub1,".vs.",name_sub2, " and ", name_ext, " as ", round(rg_sub1.sub2_ext, 4)), con_log)
+      writeLines(paste0("GDIS calculated the genetic correlation between ", name_sub1,".vs.",name_sub2, " and ", name_ext, " as ", round(rg_sub1.sub2_ext, 4)), con_log)
 
       if (is.na(optional_LDSC_rg_sub1.sub2_ext)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
         # What to write as dubbelcheck
         writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_sub1.sub2_ext, " (se = ", optional_LDSC_rg_se_sub1.sub2_ext, ")"), con_log)
-        if (check5_passed_rg_sub1.sub2_ext_and_optional_LDSC_rg_sub1.sub2_ext == TRUE)  { writeLines(paste0("The GDVIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.sub2_ext, 4),"."), con_log)}
-        if (check5_passed_rg_sub1.sub2_ext_and_optional_LDSC_rg_sub1.sub2_ext == FALSE) { writeLines(paste0("The GDVIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.sub2_ext, 4),"."), con_log)}
+        if (check5_passed_rg_sub1.sub2_ext_and_optional_LDSC_rg_sub1.sub2_ext == TRUE)  { writeLines(paste0("The GDIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.sub2_ext, 4),"."), con_log)}
+        if (check5_passed_rg_sub1.sub2_ext_and_optional_LDSC_rg_sub1.sub2_ext == FALSE) { writeLines(paste0("The GDIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_sub1.sub2_ext, 4),"."), con_log)}
         writeLines(paste0("The difference between ", round(rg_sub1.sub2_ext, 4), " and ", optional_LDSC_rg_sub1.sub2_ext, " is ",  round(check5_difference_rg_sub1.sub2_ext_and_optional_LDSC_rg_sub1.sub2_ext, 4), ", this is ", round(check5.propSE, 4), " * se.") , con_log)  }
       writeLines("    ", con_log)
 
       writeLines("Double check 6:", con_log)
-      writeLines(paste0("GDVIS calculated the genetic correlation between ", name_allcases,".vs.", name_con, " and ", name_ext, " as ", round(a.rad_allcases.con_ext,4) ), con_log)
+      writeLines(paste0("GDIS calculated the genetic correlation between ", name_allcases,".vs.", name_con, " and ", name_ext, " as ", round(a.rad_allcases.con_ext,4) ), con_log)
 
       if (is.na(optional_LDSC_rg_allcases.con_ext)) {writeLines("No optional input for this check was provided. ", con_log)}  else {
         # What to write as dubbelcheck
         writeLines(paste0("The LDSC estimated value provided as input is ", optional_LDSC_rg_allcases.con_ext, " (se = ", optional_LDSC_rg_se_allcases.con_ext, ")"), con_log)
-        if (check6_passed_rg_allcases.con_ext_and_optional_LDSC_rg_allcases.con_ext == TRUE)  { writeLines(paste0("The GDVIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_ext, 4),"."), con_log)}
-        if (check6_passed_rg_allcases.con_ext_and_optional_LDSC_rg_allcases.con_ext == FALSE) { writeLines(paste0("The GDVIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_ext, 4),"."), con_log)}
+        if (check6_passed_rg_allcases.con_ext_and_optional_LDSC_rg_allcases.con_ext == TRUE)  { writeLines(paste0("The GDIS value lies within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_ext, 4),"."), con_log)}
+        if (check6_passed_rg_allcases.con_ext_and_optional_LDSC_rg_allcases.con_ext == FALSE) { writeLines(paste0("The GDIS value does not lie within the CI +- 1.96 * ", round(optional_LDSC_rg_se_allcases.con_ext, 4),"."), con_log)}
         writeLines(paste0("The difference between ", round(rg_allcases.con_ext, 4), " and ", optional_LDSC_rg_allcases.con_ext, " is ",  round(check6_difference_rg_allcases.con_ext_and_optional_LDSC_rg_allcases.con_ext, 4), ", this is ", round(check6.propSE, 4), " * se.") , con_log)  }
       writeLines("    ", con_log)
 
       writeLines("Internal check rg_sub1.con_ext", con_log)
-      writeLines(paste0("After finding 3D coordinates, GDVIS re-estimated the genetic correlation between ", name_sub1,".vs.", name_con, " and ", name_ext, " as ", round(internal_check_rg_sub1.con_ext,4) ), con_log)
+      writeLines(paste0("After finding 3D coordinates, GDIS re-estimated the genetic correlation between ", name_sub1,".vs.", name_con, " and ", name_ext, " as ", round(internal_check_rg_sub1.con_ext,4) ), con_log)
       writeLines(paste0("The original LDSC estimated value is ", rg_sub1.con_ext, " (se = ", rg_se_sub1.con_ext, ")"), con_log)
       writeLines(paste0("The difference between ", round(internal_check_rg_sub1.con_ext, 4), " and ", rg_sub1.con_ext, " is ",  round(abs((internal_check_rg_sub1.con_ext  -  rg_sub1.con_ext)), 4)) , con_log)
       writeLines("    ", con_log)
 
       writeLines("Internal check rg_sub2.con_ext", con_log)
-      writeLines(paste0("After finding 3D coordinates, GDVIS re-estimated the genetic correlation between ", name_sub2,".vs.", name_con, " and ", name_ext, " as ", round(internal_check_rg_sub2.con_ext,4) ), con_log)
+      writeLines(paste0("After finding 3D coordinates, GDIS re-estimated the genetic correlation between ", name_sub2,".vs.", name_con, " and ", name_ext, " as ", round(internal_check_rg_sub2.con_ext,4) ), con_log)
       writeLines(paste0("The original LDSC estimated value is ", rg_sub2.con_ext, " (se = ", rg_se_sub2.con_ext, ")"), con_log)
       writeLines(paste0("The difference between ", round(internal_check_rg_sub2.con_ext, 4), " and ", rg_sub2.con_ext, " is ",  round(abs((internal_check_rg_sub2.con_ext  -  rg_sub2.con_ext)), 4)) , con_log)
       writeLines("    ", con_log)
@@ -1317,7 +1317,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
     # Message if 2D.2D
     if (plot_2D.2D == T) {
-      cli::cli_alert_success("GDVIS calc succesfully finished 2D calculations")
+      cli::cli_alert_success("GDIS calc succesfully finished 2D calculations")
     }
 
     return(mget(ls()))
@@ -1339,7 +1339,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
       if (webversion == TRUE) {
         returned_variables <- run_code_chunk()
         list2env(returned_variables, envir = temp_triangle_env) # Return the file path of the saved RData object
-        if(save_data == TRUE) {  log_fun("GDVIS calc successfully finished!", type = "success") }
+        if(save_data == TRUE) {  log_fun("GDIS calc successfully finished!", type = "success") }
         return(list(
           save_path = save_path,
           log_path = con_path    ))      }
@@ -1348,7 +1348,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
         returned_variables <- run_code_chunk() }
       list2env(returned_variables, envir = temp_triangle_env) # Return the file path of the saved RData object
       if(save_data == TRUE) {
-        cli::cli_alert_success("GDVIS calc succesfully finished!")
+        cli::cli_alert_success("GDIS calc succesfully finished!")
         return(save_path) }   }
 
    # list2env(returned_variables, envir = temp_triangle_env)
@@ -1444,7 +1444,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
     # Update save_data with the function result
     #save_data <- f.triangle_possible(line1, line2, line3)
     if (any(!c(test1, test2, test3, test4))) {
-      message_triangle_not_possible_2D.2D <- "GDVIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1"
+      message_triangle_not_possible_2D.2D <- "GDIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1"
       cli::cli_alert_danger(cli::col_red(message_triangle_not_possible_2D.2D))
       save_data <- FALSE
       return(save_data)
@@ -1776,12 +1776,12 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
     # Write general info
     writeLines("............................................................", con_log)
-    writeLines(".   GDVIS software created by: A.B. Thijssen               .", con_log)
+    writeLines(".   GDIS software created by: A.B. Thijssen               .", con_log)
     writeLines(paste(sprintf(".   Log file created on: %s", rounded_time),"              ."), con_log)
     if(webversion == FALSE) {
-     writeLines(paste(".   GDVIS mode used: 2D.2D                                 ."), con_log) }
+     writeLines(paste(".   GDIS mode used: 2D.2D                                 ."), con_log) }
     if(webversion == TRUE) {
-      writeLines(paste(".   GDVIS mode used: 2D.2D online webversion                 ."), con_log)     }
+      writeLines(paste(".   GDIS mode used: 2D.2D online webversion                 ."), con_log)     }
     writeLines("............................................................", con_log)
     writeLines("    ", con_log)
     writeLines("    ", con_log)
@@ -1794,7 +1794,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
     # Write message triangle not possible
     if (save_data == FALSE) {
       writeLines("Error:", con_log)
-      writeLines("GDVIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1", con_log)
+      writeLines("GDIS determined that the triangle is not possible, possibly due to inconsistency in input parameters. Please double-check your input. If the issue persists, it may be due to inconsistency in LDSC estimates, for instance because the rg between sub1.con and sub2.con is close to 1", con_log)
       writeLines("    ", con_log)
       writeLines("    ", con_log)
     }
@@ -1838,7 +1838,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
 
     writeLines("Double check 1:", con_log)
-    writeLines(paste0("GDVIS rotated ", triangle1.filename, " based on the most precise rg estimate with ", triangle2.filename, " which was ", rg_name, " (", rg_smallest_se_value, " (se ", smallest_se_value, ")"), con_log)
+    writeLines(paste0("GDIS rotated ", triangle1.filename, " based on the most precise rg estimate with ", triangle2.filename, " which was ", rg_name, " (", rg_smallest_se_value, " (se ", smallest_se_value, ")"), con_log)
     writeLines(paste0("The second triangle needed to rotate ", round(rotation_angle, 3), " and rotated ", round(final_angle, 3), " which gives a rotation difference of ", round(angle_difference, 3)), con_log)
     writeLines("    ", con_log)
 
@@ -1904,7 +1904,7 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
         log_path = con_path    ))
     }
 
-    cli::cli_alert_success("GDVIS calc 2D.2D succesfully finished!")
+    cli::cli_alert_success("GDIS calc 2D.2D succesfully finished!")
     if(webversion == FALSE & plot_2D.2D == TRUE){
       return(save_path)}
 
@@ -2217,12 +2217,12 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
 
       # Write general info
       writeLines("............................................................", con_log)
-      writeLines(".   GDVIS software created by: A.B. Thijssen               .", con_log)
+      writeLines(".   GDIS software created by: A.B. Thijssen               .", con_log)
       writeLines(paste(sprintf(".   Log file created on: %s", rounded_time),"              ."), con_log)
       if (webversion == FALSE) {
-        writeLines(paste(".   GDVIS mode used: cross-disorder                    ."), con_log) }
+        writeLines(paste(".   GDIS mode used: cross-disorder                    ."), con_log) }
       if (webversion == TRUE) {
-        writeLines(paste(".   GDVIS mode used: cross-disorder webversion             ."), con_log) }
+        writeLines(paste(".   GDIS mode used: cross-disorder webversion             ."), con_log) }
       writeLines("............................................................", con_log)
       writeLines("    ", con_log)
       writeLines("    ", con_log)
@@ -2262,11 +2262,11 @@ GDVIS_calc <- function(triangle.input.list, log_fun = message, webversion = FALS
       close(con_log)
 
       if(webversion == FALSE) {
-        cli::cli_alert_success("GDVIS calc succesfully finished CD calculations!")
+        cli::cli_alert_success("GDIS calc succesfully finished CD calculations!")
         return(save_path) }
 
       if(webversion == TRUE) {
-        log_fun("GDVIS calc successfully finished!", type = "success")
+        log_fun("GDIS calc successfully finished!", type = "success")
         return(list(
           save_path = save_path,
           log_path = con_path,

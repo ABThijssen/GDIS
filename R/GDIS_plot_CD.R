@@ -1,8 +1,8 @@
-#' Plot GDVIS cross-disorder plot
+#' Plot GDIS cross-disorder plot
 #'
-#' This function plots a GDVIS visualization based on GDVIS parameters.
+#' This function plots a GDIS visualization based on GDIS parameters.
 
-#' @param input_triangle_parameters the path to the RData GDVIS output, which ends with CD.triangle_parameters.RData
+#' @param input_triangle_parameters the path to the RData GDIS output, which ends with CD.triangle_parameters.RData
 #' @param show.rendering option to show the rendering of the plot in an external window, default is TRUE
 #' @param show.names option to show the names of the groups, default is TRUE
 #' @param webversion needs to stay on FALSE
@@ -10,7 +10,7 @@
 
 
 # Function to plot 3D triangles
-GDVIS_plot_CD <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, webversion = FALSE) {
+GDIS_plot_CD <- function(input_triangle_parameters, show.rendering = TRUE, show.names = TRUE, webversion = FALSE) {
 
 
 
@@ -28,7 +28,7 @@ GDVIS_plot_CD <- function(input_triangle_parameters, show.rendering = TRUE, show
   triangle_list <- temp_triangle_env$CD.triangle.output.list
 
   # Show message
-  cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS plot"), " on ", cli::col_cyan(triangle_list$name_trait1), " with ", cli::col_cyan(triangle_list$name_trait2), " with ", cli::col_cyan(triangle_list$name_trait2)))
+  cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS plot"), " on ", cli::col_cyan(triangle_list$name_trait1), " with ", cli::col_cyan(triangle_list$name_trait2), " with ", cli::col_cyan(triangle_list$name_trait2)))
 
   # Directly access the objects
   with(temp_triangle_env, {
@@ -328,61 +328,61 @@ round_three_decimals(c("h2_trait1", "h2_trait2", "h2_trait3", "h2_trait1.trait2"
 round_no_decimals(c("a.deg_trait1_trait2", "a.deg_trait1_trait3", "a.deg_trait2_trait3", "a.deg_trait1.cases_trait2.cases_vs_trait1.cases_trait3.cases","a.deg_trait1.cases_trait2.cases_vs_trait2.cases_trait3.cases", "a.deg_trait1.cases_trait3.cases_vs_trait2.cases_trait3.cases"))
 
 # Make legend
-legend <- ggplot() +
+legend <- ggplot2::ggplot() +
 
   # Plot pop mean
-  geom_point(ggplot2::aes(x = 0.1, y = -0.125), shape = 3, size = 4, stroke = 2) +
-  geom_text(ggplot2::aes(x = 0.2, y = -0.125), label = "Population mean", color = "black", hjust = 0, size = 5) +
+  ggplot2::geom_point(ggplot2::aes(x = 0.1, y = -0.125), shape = 3, size = 4, stroke = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.2, y = -0.125), label = "Population mean", color = "black", hjust = 0, size = 5) +
 
   # Plot angles with degrees
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.125, 0.095)), color = "#00B050", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.125, 0.175)), color = "#ED7D31", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.14), label = paste0(rg_trait1.cases_trait2.cases_vs_trait1.cases_trait3.cases, " (", a.deg_trait1.cases_trait2.cases_vs_trait1.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.26, 0.23)), color = "#7030A0", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.26, 0.31)), color = "#ED7D31", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.27), label = paste0(rg_trait1.cases_trait2.cases_vs_trait2.cases_trait3.cases, " (", a.deg_trait1.cases_trait2.cases_vs_trait2.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.385, 0.355)), color = "#7030A0", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.385, 0.435)), color = "#00B050", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.395), label = paste0(rg_trait1.cases_trait3.cases_vs_trait2.cases_trait3.cases, " (", a.deg_trait1.cases_trait3.cases_vs_trait2.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.51, 0.48)), color = "#083F80", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.51, 0.56)), color = "#3696D2", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.52), label = paste0(rg_trait1_trait2, " (", a.deg_trait1_trait2, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.635, 0.605)), color = "#083F80", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.635, 0.685)), color = "#B4D8F0", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.645), label = paste0(rg_trait1_trait3, " (", a.deg_trait1_trait3, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.765, 0.735)), color = "#B4D8F0", linewidth = 2) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.765, 0.815)), color = "#3696D2", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 0.775), label = paste0(rg_trait2_trait3, " (", a.deg_trait2_trait3, "\u00B0)"), color = "black", hjust = 0, size = 6) +
-  annotate("text", x = 0, y = 0.925, label = "italic(r)[g] ~ '(degrees)'", color = "black", hjust = 0, size = 6.5, parse = TRUE) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.125, 0.095)), color = "#00B050", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.125, 0.175)), color = "#ED7D31", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.14), label = paste0(rg_trait1.cases_trait2.cases_vs_trait1.cases_trait3.cases, " (", a.deg_trait1.cases_trait2.cases_vs_trait1.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.26, 0.23)), color = "#7030A0", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.26, 0.31)), color = "#ED7D31", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.27), label = paste0(rg_trait1.cases_trait2.cases_vs_trait2.cases_trait3.cases, " (", a.deg_trait1.cases_trait2.cases_vs_trait2.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.385, 0.355)), color = "#7030A0", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.385, 0.435)), color = "#00B050", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.395), label = paste0(rg_trait1.cases_trait3.cases_vs_trait2.cases_trait3.cases, " (", a.deg_trait1.cases_trait3.cases_vs_trait2.cases_trait3.cases, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.51, 0.48)), color = "#083F80", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.51, 0.56)), color = "#3696D2", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.52), label = paste0(rg_trait1_trait2, " (", a.deg_trait1_trait2, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.635, 0.605)), color = "#083F80", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.635, 0.685)), color = "#B4D8F0", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.645), label = paste0(rg_trait1_trait3, " (", a.deg_trait1_trait3, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.765, 0.735)), color = "#B4D8F0", linewidth = 2) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(0.765, 0.815)), color = "#3696D2", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 0.775), label = paste0(rg_trait2_trait3, " (", a.deg_trait2_trait3, "\u00B0)"), color = "black", hjust = 0, size = 6) +
+  ggplot2::annotate("text", x = 0, y = 0.925, label = "italic(r)[g] ~ '(degrees)'", color = "black", hjust = 0, size = 6.5, parse = TRUE) +
 
 
   # plot h2 lines
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.25, 1.25)), color = "#7030A0", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.26), label = h2_trait2.trait3, color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.375, 1.375)), color = "#00B050", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.385), label = h2_trait1.trait3, color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.5, 1.5)), color = "#ED7D31", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.51), label = h2_trait1.trait2, color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.625, 1.625)), color = "#B4D8F0", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.635), label = h2_trait3, color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.75, 1.75)), color = "#3696D2", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.76), label = h2_trait2, color = "black", hjust = 0, size = 6) +
-  geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.875, 1.875)), color = "#083F80", linewidth = 2) +
-  geom_text(ggplot2::aes(x = 0.3, y = 1.885), label = h2_trait1, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.25, 1.25)), color = "#7030A0", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.26), label = h2_trait2.trait3, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.375, 1.375)), color = "#00B050", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.385), label = h2_trait1.trait3, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.5, 1.5)), color = "#ED7D31", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.51), label = h2_trait1.trait2, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.625, 1.625)), color = "#B4D8F0", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.635), label = h2_trait3, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.75, 1.75)), color = "#3696D2", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.76), label = h2_trait2, color = "black", hjust = 0, size = 6) +
+  ggplot2::geom_line(ggplot2::aes(x = c(0.1, 0.25), y = c(1.875, 1.875)), color = "#083F80", linewidth = 2) +
+  ggplot2::geom_text(ggplot2::aes(x = 0.3, y = 1.885), label = h2_trait1, color = "black", hjust = 0, size = 6) +
 
-  annotate("text", x = 0, y = 2.035, label = "Heritability", color = "black", hjust = 0, size = 6.5) +
+  ggplot2::annotate("text", x = 0, y = 2.035, label = "Heritability", color = "black", hjust = 0, size = 6.5) +
 
   # Clean background
-  theme_minimal() +
-  theme(axis.title.x = ggplot2::element_blank(), axis.title.y = ggplot2::element_blank(),   # Remove axes titles
+  ggplot2::theme_minimal() +
+  ggplot2::theme(axis.title.x = ggplot2::element_blank(), axis.title.y = ggplot2::element_blank(),   # Remove axes titles
         axis.text.x = ggplot2::element_blank(),  axis.text.y = ggplot2::element_blank(),    # Remove axes text
         axis.ticks = ggplot2::element_blank(),                                     # Remove axes ticks
         panel.grid.major = ggplot2::element_blank(),                               # Remove major gridlines
         panel.grid.minor = ggplot2::element_blank(),                               # Remove minor gridlines
         panel.background = ggplot2::element_rect(fill = "white", colour = NA)) +   # Set background color to white
-  xlim(0, 1.6) +
+  ggplot2::xlim(0, 1.6) +
   # Scale axes
-  coord_fixed(ratio = 1)
+  ggplot2::coord_fixed(ratio = 1)
 
 
 ### Save legend
@@ -391,7 +391,7 @@ if(webversion == TRUE) {
 
 # Return message
 cli::cli_alert_info(paste0(" Legend saved as ", folder_location,"/",name_trait1, "_",name_trait2,"_" ,name_trait3,"_CD.legend.png"))
-cli::cli_alert_success("GDVIS plot succesfully finished")
+cli::cli_alert_success("GDIS plot succesfully finished")
 if (show.rendering == TRUE & webversion == FALSE) {  cli::cli_alert_info("Showing plot in external window ") }
 
 

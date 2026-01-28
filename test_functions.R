@@ -1,4 +1,7 @@
+#devtools::document() only once?
 devtools::load_all()
+devtools::check()
+
 
 ## 2D -------------------------------------------------------------------
 
@@ -33,9 +36,9 @@ input.list <- list(
   optional_LDSC_h2_allcases.con                 = 0.0915,
   optional_LDSC_h2_se_allcases.con              = 0.0079)
 
-output <- GDVIS::GDVIS_calc(input.list)
-GDVIS::GDVIS_plot(output, x_lower = -0.35, x_upper = 0.35, y_lower = -0.15, y_upper = 0.35)
-GDVIS::GDVIS_plot_2D(output)
+output <- GDIS::GDIS_calc(input.list)
+GDIS::GDIS_plot(output, x_lower = -0.35, x_upper = 0.35, y_lower = -0.15, y_upper = 0.35)
+GDIS::GDIS_plot_2D(output)
 
 
 ## 3D -------------------------------------------------------------------
@@ -91,8 +94,8 @@ input.list.3D <- list(
   optional_LDSC_rg_se_allcases.con_ext          = 0.1733)
 
 
-output.3D <- GDVIS_calc(input.list.3D)
-GDVIS_plot(output.3D)
+output.3D <- GDIS_calc(input.list.3D)
+GDIS_plot(output.3D)
 
 
 
@@ -181,8 +184,8 @@ input.list.2D.2D <- list(
   # Type info
   plot_2D.2D                                            = TRUE)
 
-output.2D.2D <- GDVIS_calc(input.list.2D.2D)
-GDVIS_plot(output.2D.2D)
+output.2D.2D <- GDIS_calc(input.list.2D.2D)
+GDIS_plot(output.2D.2D)
 
 
 
@@ -207,5 +210,5 @@ input.list.CD <- list(
   pop.prev_trait2                               = 0.01,
   pop.prev_trait3                               = 0.16)
 
-output.CD <- GDVIS_calc(input.list.CD)
-GDVIS_plot(output.CD, show.names = F)
+output.CD <- GDIS_calc(input.list.CD)
+GDIS_plot(output.CD, show.names = F)

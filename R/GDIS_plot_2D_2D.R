@@ -1,14 +1,14 @@
-#' Plot GDVIS 2D.2D plot
+#' Plot GDIS 2D.2D plot
 #'
-#' This function plots a GDVIS visualization based on GDVIS parameters.
+#' This function plots a GDIS visualization based on GDIS parameters.
 
-#' @param input_triangle_parameters the path to the RData GDVIS output, which ends with 2D_2D.triangle_parameters.RData
+#' @param input_triangle_parameters the path to the RData GDIS output, which ends with 2D_2D.triangle_parameters.RData
 #' @param show.rendering option to show the rendering of the plot in an external window, default is TRUE
 #' @param show.names option to show the names of the groups, default is true
 #' @param webversion needs to stay on FALSE
 #' @export
 # Function to plot 2D_2D triangles
-GDVIS_plot_2D_2D <- function(input_triangle_parameters, show.rendering = TRUE, webversion = FALSE, show.names = TRUE) {
+GDIS_plot_2D_2D <- function(input_triangle_parameters, show.rendering = TRUE, webversion = FALSE, show.names = TRUE) {
 
 
 
@@ -25,7 +25,7 @@ GDVIS_plot_2D_2D <- function(input_triangle_parameters, show.rendering = TRUE, w
     triangle_list <- temp_triangle_env$double.triangle.output.list
 
     # Show message
-    cli::cli_h1(paste0("Running ", cli::col_cyan("GDVIS plot 2D_2D"), " on ", cli::col_cyan(triangle_list$triangle1.filename), " with " , cli::col_cyan(triangle_list$triangle2.filename)))
+    cli::cli_h1(paste0("Running ", cli::col_cyan("GDIS plot 2D_2D"), " on ", cli::col_cyan(triangle_list$triangle1.filename), " with " , cli::col_cyan(triangle_list$triangle2.filename)))
 
     # Directly access the objects
     with(temp_triangle_env, {
@@ -509,7 +509,7 @@ GDVIS_plot_2D_2D <- function(input_triangle_parameters, show.rendering = TRUE, w
 
     # Return message
     cli::cli_alert_info(paste0(" Legend saved as ", triangle1.folder_location, "/", triangle1.filename, ".vs.", triangle2.filename, "2D_2Dlegend.png"))
-    cli::cli_alert_success("GDVIS plot succesfully finished")
+    cli::cli_alert_success("GDIS plot succesfully finished")
     if (show.rendering == TRUE) {  cli::cli_alert_info("Showing plot in external window ") }
 
 
