@@ -5,11 +5,10 @@ Anaïs Thijssen (<a.b.thijssen@gmail.com>)
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/GDIS)](https://CRAN.R-project.org/package=GDIS)
-[![R-CMD-check](https://github.com/stefanvermeent/projectlog/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ABthijssen/GDIS/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/GDIS)](https://www.r-pkg.org/pkg/GDIS)
+[![R-CMD-check](https://github.com/ABThijssen/GDIS/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ABThijssen/GDIS/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 ------------------------------------------------------------------------
