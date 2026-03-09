@@ -14,7 +14,7 @@ Anaïs Thijssen (<a.b.thijssen@gmail.com>)
 
 # Welcome to this GDIS tutorial
 
-**GDIS (Genetic Distance Visualization)** is an R package that allows
+**GDIS (Genetic DIstance of disorder Subtypes)** is an R package that allows
 you to compute and visualize genetic distances between subtypes of a
 disorder (2D mode), between a subtype and an external trait (3D mode),
 between two different subtype definitions (2D_2D mode) and between three
@@ -32,7 +32,7 @@ website here: <https://GDIS.shinyapps.io/GDIS/>
 
 ``` r
 library(devtools)
-devtools::install_github("https://github.com/ABThijsen/GDIS")
+devtools::install_github("https://github.com/ABThijssen/GDIS")
 
 library(GDIS)
 ```

@@ -22,7 +22,7 @@ library(tidyverse)
 
 # Welcome to this GDVIS tutorial
 
-**GDVIS (Genetic Distance Visualization)** is an R package that allows you to compute and visualize genetic distances between subtypes of a disorder (2D mode), between a subtype and an external trait (3D mode), between two different subtype definitions (2D_2D mode) and between three different traits (CD mode). Note that all heritabilities need to be on the 50:50 case-control scale. This can be achieved by using the Neffective in LDSC (for more details, see the paper).
+**GDVIS (Genetic DIstance of disorder Subtypes)** is an R package that allows you to compute and visualize genetic distances between subtypes of a disorder (2D mode), between a subtype and an external trait (3D mode), between two different subtype definitions (2D_2D mode) and between three different traits (CD mode). Note that all heritabilities need to be on the 50:50 case-control scale. This can be achieved by using the Neffective in LDSC (for more details, see the paper).
 
 Check out the preprint here: <https://doi.org/10.1101/2025.11.18.25340484><br>
 Check out the GDVIS website here: <https://gdvis.shinyapps.io/gdvis/>
@@ -34,7 +34,7 @@ Check out the GDVIS website here: <https://gdvis.shinyapps.io/gdvis/>
 ```{r, echo = TRUE, eval = F, results="hide", message=FALSE, warning=FALSE}
 
 library(devtools)
-devtools::install_github("https://github.com/ABThijsen/GDVIS")
+devtools::install_github("https://github.com/ABThijssen/GDVIS")
 
 library(GDVIS)
 

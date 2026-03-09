@@ -215,7 +215,7 @@ GDIS_plot_3D <- function(input_triangle_parameters, show.rendering = TRUE, show.
 
       fig <- fig %>%
         # External trait from popmean
-        padd_explicit_color_line(
+        add_explicit_color_line(
           x = seq( x.ext, x.popmean,length.out = length(gradient_colors)),
           y = seq( y.ext,y.popmean, length.out = length(gradient_colors)),
           z = seq( z.ext,z.popmean, length.out = length(gradient_colors)),
